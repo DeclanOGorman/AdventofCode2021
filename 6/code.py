@@ -14,4 +14,4 @@ def observe(days):
     return sum([a for a in fish])
 
 print(f'Part A: after 80 days {observe(80)} lanternfish remaining')
-print(f'Part A: after 256 days {observe(256-80)} lanternfish remaining')
+print(f'Part B: after 256 days {observe(256-80)} lanternfish remaining')
