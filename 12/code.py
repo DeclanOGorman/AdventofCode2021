@@ -17,5 +17,5 @@ def nav(loc : str, path : list, doubled : bool = False): # Navigate
     path.append(loc)
     return sum([nav(i, path.copy(), doubled) for i in caves[loc]]) # evaulate children
 
-print('Part A: Number of valid routes through caves - {0}'.format(nav('start', list(), True)))
-print('Part A: Number of valid routes through caves - {0}'.format(nav('start', list())))
+print('Part A: Valid routes through caves with small caves visited once- {0}'.format(nav('start', list(), True)))
+print('Part B: Valid routes through caves with 1st small cave visited twice - {0}'.format(nav('start', list())))
