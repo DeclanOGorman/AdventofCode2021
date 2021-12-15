@@ -4,18 +4,19 @@ with open('./14/input_a.txt', 'r') as f:
     poly = f.readline().strip()
     mapping = dict([a.strip().split(' -> ') for a in f if a.strip() != ""])
 
-def step(poly, mapping : dict, steps):
-    for i in range(0,steps):
-        print(f'Step - {i}')
-        newpoly = ''
-        for j in range(0,len(poly)-1):
-            newpoly += poly[j] + mapping[poly[j:j+2]]
-        poly = newpoly + poly[len(poly)-1]
-    return poly
+pairs = Counter([poly[i:i+2] for i in range(0, len(poly)-1)])
+tally = Counter(list(poly))
+results = list()
 
-poly = step(poly, mapping, 10)
-count = list(Counter(poly).values())
-count.sort()
-print(f'Part A: Poly after 10 iterations - {len(poly)}, diff = {count[len(count)-1] - count[0]}')
+for i in range(0,40):
+    for p, n in pairs.copy().items():
+        c = mapping[p]
+        tally[c] += n
+        pairs[p] -= n
+        pairs[p[0]+c] += n
+        pairs[c+p[1]] += n
+    hist = tally.most_common()
+    results.append(hist[0][1] - hist[len(hist)-1][1])
 
-# To be rewritten for day 2... 
+print(f'Part A: Poly after 10 iterations, diff = {results[9]}') # test = 1588
+print(f'Part B: Poly after 40 iterations, diff = {results[39]}')
