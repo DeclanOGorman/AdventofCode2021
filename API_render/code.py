@@ -3,7 +3,7 @@
 from datetime import datetime
 from termcolor import colored  # https://pypi.org/project/termcolor/
 import json
-with open('./API_render/leaderboard.json') as f: 
+with open('./API_render/leaderboard_21.json') as f: 
     board = json.loads(f.readline().strip())
 
 data = list()
@@ -17,10 +17,15 @@ for m in board['members']:
 
 def sortKey(m): return m[1]
 data.sort(key=sortKey, reverse=True) #sort by local rank
-def star(num): return colored('*', 'yellow' if num == 2 else 'white')   #''.join(['*' for a in range(num)]) # Show stars rather than numbers * / **
+def star(num): return colored(''.join(['*' for a in range(num)]), 'yellow' if num == 2 else 'white')  
 
-print('{0:<3}   {1:<31} {2}'.format('#', 'Name (Stars)', ''.join(['{:<8} '.format(str(a)) for a in range(1, 25)])))
+#print('{0:<3}   {1:<31} {2}'.format('#', 'Name (Stars)', ''.join(['{:<8} '.format(str(a)) for a in range(1, 25)])))
+print('{0:},{1:},{2}'.format('#', 'Name,Stars', ''.join(['{:},'.format(str(a)) for a in range(1, 25)])))
 for rank in range(len(data)): 
-    res = ''.join([''.format(a) for a in data[rank][3]])
-    print('{:<3} - {:<25} ({:<2}) '.format(rank+1, str(data[rank][0]), data[rank][2]), 
-        ''.join(['{0:<2} {1:<12} '.format(star(data[rank][3][a][0]), colored(data[rank][3][a][1], 'red' if 0 < data[rank][3][a][1] < 90 else 'white')) for a in data[rank][3]]))
+    #print('{:<3} - {:<25} ({:<2}) '.format(rank+1, str(data[rank][0]), data[rank][2]), 
+    #    ''.join(['{0:<2} {1:<12} '.format(star(data[rank][3][a][0]), 
+    #    colored(data[rank][3][a][1], 'red' if 0 < data[rank][3][a][1] < 90 else 'white')) for a in sorted(data[rank][3])]))
+
+    print('{:},{:},{:},'.format(rank+1, str(data[rank][0]), data[rank][2]), 
+        ''.join(['{0},{1},'.format(star(data[rank][3][a][0]), 
+        colored(data[rank][3][a][1], 'red' if 0 < data[rank][3][a][1] < 90 else 'white')) for a in sorted(data[rank][3])]))
