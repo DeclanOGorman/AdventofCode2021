@@ -18,4 +18,4 @@ while max(p1score, p2score) < 1000:
     p2score += p2loc
     if p2score >= 1000: break
 
-print(f'Part A: score after first player reaches 1000 - {min(p1score, p2score)} x {ddice-1} = {min(p1score, p2score) * ddice-1}')
+print(f'Part A: score after first player reaches 1000 - {min(p1score, p2score)} x {ddice-1} = {min(p1score, p2score) * (ddice-1)}')
