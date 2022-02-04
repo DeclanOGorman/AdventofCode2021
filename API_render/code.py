@@ -3,7 +3,7 @@
 from datetime import datetime
 from termcolor import colored  # https://pypi.org/project/termcolor/
 import json
-with open('./API_render/leaderboard_21.json') as f: 
+with open('./API_render/leaderboard_31.json') as f: 
     board = json.loads(f.readline().strip())
 
 data = list()
